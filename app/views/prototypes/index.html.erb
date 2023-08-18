@@ -8,11 +8,9 @@
     <%# // ログインしているときは上記を表示する %>
     <div class="card__wrapper">
       <%# 投稿機能実装後、部分テンプレートでプロトタイプ投稿一覧を表示する %>
-      <%= render partial: 'prototype', locals: { message: @prototype } %>
-        <%= image_tag message.image, class: 'card__img' if message.image.attached? %>
-        <%= form.text_field :protoname, placeholder: "text", rows: "10" %>
-        <%= form.text_field :catchcopy, placeholder: "text", rows: "10" %>
-        <%= form.text_field :user, placeholder: "text", rows: "10" %>
+    <% @prototypes.each do |prototype| %>
+      <%= render partial: 'prototype', locals: { prototype: prototype } %>
+    <% end %>
     </div>
   </div>
 </main>
