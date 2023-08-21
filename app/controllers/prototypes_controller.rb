@@ -1,7 +1,8 @@
 class PrototypesController < ApplicationController
   def new
-   @prototype = Prototype.new
+    @prototype = Prototype.new
   end
+
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
@@ -11,10 +12,9 @@ class PrototypesController < ApplicationController
     end
   end
 
-
   private
-    def prototype_params
-      params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
-    end
-end
 
+  def prototype_params
+    params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
+  end
+end
