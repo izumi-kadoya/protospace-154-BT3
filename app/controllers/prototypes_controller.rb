@@ -3,13 +3,18 @@ class PrototypesController < ApplicationController
    @prototype = Prototype.new
   end
   def create
-    Prototype.create(prototype_params)
-    redirect_to '/' # ルートURLにリダイレクト
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to '/'
+    else
+      render '/prototypes/new', status: :unprocessable_entity
+    end
   end
+
+
+  private
+    def prototype_params
+      params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
+    end
 end
 
-private
-
-  def prototype_params
-   params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
-  end
