@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+  before_action :set_prototype, only: :show
   def index
     @prototypes = Prototype.all
   end
@@ -17,12 +18,15 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    @prototype = Prototype.find(params[:id])
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
   end
 
   private
+
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
+  end
 
   def prototype_params
     params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
