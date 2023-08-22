@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def index
     user = User.all
   end
@@ -11,5 +10,4 @@ class UsersController < ApplicationController
     @job = User.find(params[:id])
     @prototypes = @user.prototypes
   end
-
 end
