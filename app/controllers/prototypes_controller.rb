@@ -1,6 +1,7 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: :destroy
- 
+  before_action :ensure_correct_user, only: :destroy
+
   def index
     @prototypes = Prototype.all
   end
@@ -32,5 +33,12 @@ class PrototypesController < ApplicationController
 
   def prototype_params
     params.require(:prototype).permit(:protoname, :catchcopy, :concept, :image).merge(user_id: current_user.id)
+  end
+
+  def ensure_correct_user
+    @prototype = Prototype.find(params[:id])
+    unless current_user == @prototype.user
+      redirect_to root_path
+    end
   end
 end
