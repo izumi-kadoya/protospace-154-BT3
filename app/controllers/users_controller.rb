@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @username = User.find(params[:id])
     @profile = User.find(params[:id])
     @job = User.find(params[:id])
-    @prototypes = Prototype.all
+    @prototypes = @user.prototypes
   end
+
 end
