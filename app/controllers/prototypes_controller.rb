@@ -1,4 +1,6 @@
 class PrototypesController < ApplicationController
+  before_action :authenticate_user!, only: :destroy
+ 
   def index
     @prototypes = Prototype.all
   end
@@ -25,7 +27,6 @@ class PrototypesController < ApplicationController
     prototype.destroy
     redirect_to root_path
   end
-
 
   private
 
