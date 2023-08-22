@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
+
+  def index
+    user = User.all
+  end
+
   def show
-    @username = current_user.username
-    @profile = current_user.profile
-    @job = current_user.job
+    @user = User.find(params[:id])
+    @username = User.find(params[:id])
+    @profile = User.find(params[:id])
+    @job = User.find(params[:id])
     @prototypes = Prototype.all
   end
 end
